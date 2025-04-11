@@ -56,34 +56,32 @@
 <button onclick="submitQuote()">Submit</button>
 
 <script>
-  function adjustQty(id, delta) {
-    const input = document.getElementById(id);
-    let val = parseInt(input.value) + delta;
-    if (val < 0) val = 0;
-    if (val > 99999) val = 99999;
-    input.value = val;
-  }
+function submitQuote() {
+  const items = [
+    { name: 'Zavida Vanilla & Hazelnut', qty: document.getElementById('item1').value },
+    { name: 'MadeGood Granola Minis', qty: document.getElementById('item2').value },
+    { name: 'Flamingo 5-Blade Razor + 13 Cartridges', qty: document.getElementById('item3').value },
+  ];
 
-  function submitQuote() {
-    const items = [
-      { name: 'Zavida Vanilla & Hazelnut', qty: document.getElementById('item1').value },
-      { name: 'MadeGood Granola Minis', qty: document.getElementById('item2').value },
-      { name: 'Flamingo 5-Blade Razor + 13 Cartridges', qty: document.getElementById('item3').value },
-    ];
-
-    let body = '您好，我想詢價以下商品：%0D%0A';
-    items.forEach(item => {
-      if (item.qty > 0) body += `- ${item.name}：${item.qty} 件%0D%0A`;
-    });
-
-    if (body === '您好，我想詢價以下商品：%0D%0A') {
-      alert('請至少選擇一個商品數量');
-      return;
+  let lines = [];
+  items.forEach(item => {
+    if (parseInt(item.qty) > 0) {
+      lines.push(`- ${item.name}：${item.qty} 件`);
     }
+  });
 
-    const mailto = `mailto:gorskyyu1024@gmail.com?subject=報價單回覆&body=${body}`;
-    window.location.href = mailto;
+  if (lines.length === 0) {
+    alert('請至少選擇一個商品數量');
+    return;
   }
+
+  const subject = '報價單回覆';
+  const bodyText = '您好，我想詢價以下商品：\n' + lines.join('\n');
+  const mailtoLink = `mailto:gorskyyu1024@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+
+  window.location.href = mailtoLink;
+}
+
 </script>
 </body>
 </html>
