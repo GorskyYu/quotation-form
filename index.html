@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>本期特價報價單</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+    th { background-color: #f2f2f2; }
+    button { padding: 4px 10px; }
+    input[type='number'] { width: 60px; text-align: center; }
+  </style>
+</head>
+<body>
+<h2>本期特價報價單</h2>
+<table>
+  <tr>
+    <th>品名</th>
+    <th>規格</th>
+    <th>價格</th>
+    <th>數量</th>
+  </tr>
+  <tr>
+    <td>Zavida Vanilla & Hazelnut</td>
+    <td>907g</td>
+    <td>651</td>
+    <td>
+      <button onclick="adjustQty('item1', -1)">-</button>
+      <input type="number" id="item1" value="0" min="0" max="99999" readonly>
+      <button onclick="adjustQty('item1', 1)">+</button>
+    </td>
+  </tr>
+  <tr>
+    <td>MadeGood Granola Minis</td>
+    <td>24x24g</td>
+    <td>463</td>
+    <td>
+      <button onclick="adjustQty('item2', -1)">-</button>
+      <input type="number" id="item2" value="0" min="0" max="99999" readonly>
+      <button onclick="adjustQty('item2', 1)">+</button>
+    </td>
+  </tr>
+  <tr>
+    <td>Flamingo 5-Blade Razor + 13 Cartridges</td>
+    <td>-</td>
+    <td>900</td>
+    <td>
+      <button onclick="adjustQty('item3', -1)">-</button>
+      <input type="number" id="item3" value="0" min="0" max="99999" readonly>
+      <button onclick="adjustQty('item3', 1)">+</button>
+    </td>
+  </tr>
+</table>
+
+<button onclick="submitQuote()">Submit</button>
+
+<script>
+  function adjustQty(id, delta) {
+    const input = document.getElementById(id);
+    let val = parseInt(input.value) + delta;
+    if (val < 0) val = 0;
+    if (val > 99999) val = 99999;
+    input.value = val;
+  }
+
+  function submitQuote() {
+    const items = [
+      { name: 'Zavida Vanilla & Hazelnut', qty: document.getElementById('item1').value },
+      { name: 'MadeGood Granola Minis', qty: document.getElementById('item2').value },
+      { name: 'Flamingo 5-Blade Razor + 13 Cartridges', qty: document.getElementById('item3').value },
+    ];
+
+    let body = '您好，我想詢價以下商品：%0D%0A';
+    items.forEach(item => {
+      if (item.qty > 0) body += `- ${item.name}：${item.qty} 件%0D%0A`;
+    });
+
+    if (body === '您好，我想詢價以下商品：%0D%0A') {
+      alert('請至少選擇一個商品數量');
+      return;
+    }
+
+    const mailto = `mailto:gorskyyu1024@gmail.com?subject=報價單回覆&body=${body}`;
+    window.location.href = mailto;
+  }
+</script>
+</body>
+</html>
