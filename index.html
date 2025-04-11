@@ -27,7 +27,7 @@
     <td>651</td>
     <td>
       <button onclick="adjustQty('item1', -1)">-</button>
-      <input type="number" id="item1" value="0" min="0" max="99999" readonly>
+      <input type="number" id="item1" value="0" min="0" max="99999" onkeydown="return false">
       <button onclick="adjustQty('item1', 1)">+</button>
     </td>
   </tr>
@@ -37,7 +37,7 @@
     <td>463</td>
     <td>
       <button onclick="adjustQty('item2', -1)">-</button>
-      <input type="number" id="item2" value="0" min="0" max="99999" readonly>
+      <input type="number" id="item2" value="0" min="0" max="99999" onkeydown="return false">
       <button onclick="adjustQty('item2', 1)">+</button>
     </td>
   </tr>
@@ -47,7 +47,7 @@
     <td>900</td>
     <td>
       <button onclick="adjustQty('item3', -1)">-</button>
-      <input type="number" id="item3" value="0" min="0" max="99999" readonly>
+      <input type="number" id="item3" value="0" min="0" max="99999" onkeydown="return false">
       <button onclick="adjustQty('item3', 1)">+</button>
     </td>
   </tr>
@@ -84,4 +84,11 @@
     }
 
     const subject = '報價單回覆';
-    const bodyText = '您好，我想詢價以下商品：\n' +
+    const bodyText = '您好，我想詢價以下商品：\n' + lines.join('\n');
+    const mailtoLink = `mailto:gorskyyu1024@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+
+    window.location.href = mailtoLink;
+  }
+</script>
+</body>
+</html>
