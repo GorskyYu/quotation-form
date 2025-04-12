@@ -207,8 +207,8 @@
       return;
     }
 
-    const subject = '報價單回覆';
-    const bodyText = '您好，我想詢價以下商品：\n' + lines.join('\n');
+    const subject = '提交訂單';
+    const bodyText = '您好，我想訂購以下商品：\n' + lines.join('\n');
     const mailtoLink = `mailto:gorskyyu1024@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
     window.location.href = mailtoLink;
   }
