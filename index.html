@@ -30,7 +30,7 @@
     <td>651</td>
     <td>
       <button onclick="adjustQty('item1', -1)">-</button>
-      <input type="number" id="item1" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item1" value="0" min="0" max="99999">
       <button onclick="adjustQty('item1', 1)">+</button>
     </td>
   </tr>
@@ -41,7 +41,7 @@
     <td>463</td>
     <td>
       <button onclick="adjustQty('item2', -1)">-</button>
-      <input type="number" id="item2" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item2" value="0" min="0" max="99999">
       <button onclick="adjustQty('item2', 1)">+</button>
     </td>
   </tr>
@@ -52,7 +52,7 @@
     <td>900</td>
     <td>
       <button onclick="adjustQty('item3', -1)">-</button>
-      <input type="number" id="item3" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item3" value="0" min="0" max="99999">
       <button onclick="adjustQty('item3', 1)">+</button>
     </td>
   </tr>
@@ -63,7 +63,7 @@
     <td>707</td>
     <td>
       <button onclick="adjustQty('item4', -1)">-</button>
-      <input type="number" id="item4" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item4" value="0" min="0" max="99999">
       <button onclick="adjustQty('item4', 1)">+</button>
     </td>
   </tr>
@@ -74,7 +74,7 @@
     <td>707</td>
     <td>
       <button onclick="adjustQty('item5', -1)">-</button>
-      <input type="number" id="item5" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item5" value="0" min="0" max="99999">
       <button onclick="adjustQty('item5', 1)">+</button>
     </td>
   </tr>
@@ -85,7 +85,7 @@
     <td>707</td>
     <td>
       <button onclick="adjustQty('item6', -1)">-</button>
-      <input type="number" id="item6" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item6" value="0" min="0" max="99999">
       <button onclick="adjustQty('item6', 1)">+</button>
     </td>
   </tr>
@@ -96,7 +96,7 @@
     <td>471</td>
     <td>
       <button onclick="adjustQty('item7', -1)">-</button>
-      <input type="number" id="item7" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item7" value="0" min="0" max="99999">
       <button onclick="adjustQty('item7', 1)">+</button>
     </td>
   </tr>
@@ -107,7 +107,7 @@
     <td>512</td>
     <td>
       <button onclick="adjustQty('item8', -1)">-</button>
-      <input type="number" id="item8" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item8" value="0" min="0" max="99999">
       <button onclick="adjustQty('item8', 1)">+</button>
     </td>
   </tr>
@@ -118,7 +118,7 @@
     <td>407</td>
     <td>
       <button onclick="adjustQty('item9', -1)">-</button>
-      <input type="number" id="item9" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item9" value="0" min="0" max="99999">
       <button onclick="adjustQty('item9', 1)">+</button>
     </td>
   </tr>
@@ -129,7 +129,7 @@
     <td>741</td>
     <td>
       <button onclick="adjustQty('item10', -1)">-</button>
-      <input type="number" id="item10" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item10" value="0" min="0" max="99999">
       <button onclick="adjustQty('item10', 1)">+</button>
     </td>
   </tr>
@@ -140,7 +140,7 @@
     <td>741</td>
     <td>
       <button onclick="adjustQty('item11', -1)">-</button>
-      <input type="number" id="item11" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item11" value="0" min="0" max="99999">
       <button onclick="adjustQty('item11', 1)">+</button>
     </td>
   </tr>
@@ -151,7 +151,7 @@
     <td>741</td>
     <td>
       <button onclick="adjustQty('item12', -1)">-</button>
-      <input type="number" id="item12" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item12" value="0" min="0" max="99999">
       <button onclick="adjustQty('item12', 1)">+</button>
     </td>
   </tr>
@@ -162,7 +162,7 @@
     <td>741</td>
     <td>
       <button onclick="adjustQty('item13', -1)">-</button>
-      <input type="number" id="item13" value="0" min="0" max="99999" onkeydown="return false">
+      <input type="number" id="item13" value="0" min="0" max="99999">
       <button onclick="adjustQty('item13', 1)">+</button>
     </td>
   </tr>
@@ -173,6 +173,7 @@
   function adjustQty(id, delta) {
     const input = document.getElementById(id);
     let val = parseInt(input.value) + delta;
+    if (isNaN(val)) val = 0;
     if (val < 0) val = 0;
     if (val > 99999) val = 99999;
     input.value = val;
@@ -208,7 +209,7 @@
     }
 
     const subject = '提交訂單';
-    const bodyText = '您好，我想訂購以下商品：\n' + lines.join('\n');
+    const bodyText = '您好，我要購買以下商品：\n' + lines.join('\n');
     const mailtoLink = `mailto:gorskyyu1024@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
     window.location.href = mailtoLink;
   }
